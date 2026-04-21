@@ -1,0 +1,170 @@
+{
+    "command": "SELECT",
+    "fields": [
+        {
+            "name": "id",
+            "tableID": 26845,
+            "columnID": 1,
+            "dataTypeID": 23,
+            "dataTypeSize": 4,
+            "dataTypeModifier": -1,
+            "format": "text"
+        },
+        {
+            "name": "aansprekingen",
+            "tableID": 26845,
+            "columnID": 2,
+            "dataTypeID": 1043,
+            "dataTypeSize": -1,
+            "dataTypeModifier": 54,
+            "format": "text"
+        }
+    ],
+    "rowCount": 36,
+    "rows": [
+        {
+            "id": 1,
+            "aansprekingen": "De Heer"
+        },
+        {
+            "id": 2,
+            "aansprekingen": "Mevrouw"
+        },
+        {
+            "id": 3,
+            "aansprekingen": "Dhr. En Mevr."
+        },
+        {
+            "id": 5,
+            "aansprekingen": "De Heren"
+        },
+        {
+            "id": 7,
+            "aansprekingen": "N.V."
+        },
+        {
+            "id": 8,
+            "aansprekingen": "C.V."
+        },
+        {
+            "id": 9,
+            "aansprekingen": "V.O.F."
+        },
+        {
+            "id": 10,
+            "aansprekingen": "FIRMA"
+        },
+        {
+            "id": 11,
+            "aansprekingen": "Dokter"
+        },
+        {
+            "id": 12,
+            "aansprekingen": "Meester"
+        },
+        {
+            "id": 13,
+            "aansprekingen": "Advokaat"
+        },
+        {
+            "id": 15,
+            "aansprekingen": "V.Z.W."
+        },
+        {
+            "id": 16,
+            "aansprekingen": "Architect"
+        },
+        {
+            "id": 17,
+            "aansprekingen": "Studiebureau"
+        },
+        {
+            "id": 18,
+            "aansprekingen": "Gemeente"
+        },
+        {
+            "id": 19,
+            "aansprekingen": "Miss"
+        },
+        {
+            "id": 20,
+            "aansprekingen": "Sir"
+        },
+        {
+            "id": 21,
+            "aansprekingen": "Dhr."
+        },
+        {
+            "id": 22,
+            "aansprekingen": "Mevr."
+        },
+        {
+            "id": 24,
+            "aansprekingen": "S.P.R.L"
+        },
+        {
+            "id": 25,
+            "aansprekingen": "Monsieur"
+        },
+        {
+            "id": 26,
+            "aansprekingen": "Madam"
+        },
+        {
+            "id": 27,
+            "aansprekingen": "Meesters"
+        },
+        {
+            "id": 29,
+            "aansprekingen": "Boekhoudkantoor"
+        },
+        {
+            "id": 30,
+            "aansprekingen": "Meesteres"
+        },
+        {
+            "id": 31,
+            "aansprekingen": "Fam."
+        },
+        {
+            "id": 32,
+            "aansprekingen": "Flt. Adm."
+        },
+        {
+            "id": 33,
+            "aansprekingen": "Dr."
+        },
+        {
+            "id": 34,
+            "aansprekingen": "mégatestnl"
+        },
+        {
+            "id": 35,
+            "aansprekingen": "Chocolatier"
+        },
+        {
+            "id": 36,
+            "aansprekingen": "san"
+        },
+        {
+            "id": 37,
+            "aansprekingen": "Madame"
+        },
+        {
+            "id": 38,
+            "aansprekingen": "B.V."
+        },
+        {
+            "id": 39,
+            "aansprekingen": "Mr"
+        },
+        {
+            "id": 40,
+            "aansprekingen": "Sjarel"
+        },
+        {
+            "id": 41,
+            "aansprekingen": "B.V.B.A."
+        }
+    ]
+}

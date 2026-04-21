@@ -1,0 +1,240 @@
+{
+  "info": {
+    "name": "RecordSetFromAPI",
+    "_postman_id": "recordset-from-api-collection",
+    "description": "API calls used by the RecordSetFromAPITextProject Xojo app.\n\nSetup:\n1. Run \"Get Access Token\" first — it stores the token in the {{accessToken}} variable automatically.\n2. Use the query requests with any SQL in the body.\n\nVariables (set in the collection Variables tab):\n- authBaseUrl    : https://charon.bouwsoft.be  (auth server)\n- baseUrl        : http://localhost:8080        (local demo server for queries)\n- clientNr       : 115\n- refreshToken   : REPLACE_WITH_YOUR_REFRESH_TOKEN\n- accessToken    : (filled automatically by the Get Access Token request)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "authBaseUrl",
+      "value": "https://charon.bouwsoft.be",
+      "type": "string"
+    },
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "clientNr",
+      "value": "115",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "REPLACE_WITH_YOUR_REFRESH_TOKEN",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Get Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const body = pm.response.json();",
+                  "    if (body.AccessToken) {",
+                  "        pm.collectionVariables.set('accessToken', body.AccessToken);",
+                  "        console.log('Access token saved. Valid until: ' + body.ValidUntil);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "clientnr",
+                "value": "{{clientNr}}"
+              },
+              {
+                "key": "refreshtoken",
+                "value": "{{refreshToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{authBaseUrl}}/api/v1/Authorize/AccessToken",
+              "host": ["{{authBaseUrl}}"],
+              "path": ["api", "v1", "Authorize", "AccessToken"]
+            },
+            "description": "Fetches a new access token using the refresh token. The token is automatically stored in {{accessToken}} via the test script."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Power Query",
+      "item": [
+        {
+          "name": "Validate SQL",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accesstoken",
+                "value": "{{accessToken}}"
+              },
+              {
+                "key": "ClientNr",
+                "value": "{{clientNr}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "SELECT * FROM tracks ORDER BY id ASC"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/apps/power/validate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "apps", "power", "validate"]
+            },
+            "description": "Validates an SQL query without executing it. Returns the sanitised SQL on success (200 text/plain), or 403 if the query references unauthorized schemas or uses DDL commands."
+          }
+        },
+        {
+          "name": "Execute Query (rows only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accesstoken",
+                "value": "{{accessToken}}"
+              },
+              {
+                "key": "ClientNr",
+                "value": "{{clientNr}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "SELECT * FROM tracks ORDER BY id ASC"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/apps/power/query?removeNulls=true&returnInfo=false",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "apps", "power", "query"],
+              "query": [
+                {
+                  "key": "removeNulls",
+                  "value": "true",
+                  "description": "Strip null-valued keys from row objects"
+                },
+                {
+                  "key": "returnInfo",
+                  "value": "false",
+                  "description": "false = rows + rowCount only; true = also includes command and fields metadata"
+                }
+              ]
+            },
+            "description": "Executes a query and returns { rowCount, rows }. NULL values are removed from row objects by default."
+          }
+        },
+        {
+          "name": "Execute Query (with fields metadata)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accesstoken",
+                "value": "{{accessToken}}"
+              },
+              {
+                "key": "ClientNr",
+                "value": "{{clientNr}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "SELECT * FROM tracks ORDER BY id ASC"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/apps/power/query?removeNulls=false&returnInfo=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "apps", "power", "query"],
+              "query": [
+                {
+                  "key": "removeNulls",
+                  "value": "false",
+                  "description": "Strip null-valued keys from row objects"
+                },
+                {
+                  "key": "returnInfo",
+                  "value": "true",
+                  "description": "true = includes command and fields metadata (with PostgreSQL dataTypeID per column)"
+                }
+              ]
+            },
+            "description": "This is the call the Xojo app makes (removeNulls=false, returnInfo=true). Returns { command, fields, rowCount, rows } — the fields array contains PostgreSQL column metadata including dataTypeID."
+          }
+        },
+        {
+          "name": "Execute Multi Query",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accesstoken",
+                "value": "{{accessToken}}"
+              },
+              {
+                "key": "ClientNr",
+                "value": "{{clientNr}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "SELECT * FROM tracks ORDER BY id ASC;\nSELECT COUNT(*) AS total FROM tracks;"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/apps/power/query-multi?removeNulls=false&returnInfo=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "apps", "power", "query-multi"],
+              "query": [
+                {
+                  "key": "removeNulls",
+                  "value": "false"
+                },
+                {
+                  "key": "returnInfo",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Executes multiple semicolon-separated SQL statements and returns an array of result objects, one per statement."
+          }
+        }
+      ]
+    }
+  ]
+}

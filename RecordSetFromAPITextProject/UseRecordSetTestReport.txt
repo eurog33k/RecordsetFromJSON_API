@@ -1,0 +1,101 @@
+Auto Demo Test Report
+=====================
+Date: 18/04/2026 17:25
+
+[ Slide 6: Connect ]
+[PASS] Connected=True -> "True"
+[PASS] Error=False after Connect -> "False"
+
+[ Slide 7: SQLSelect — JSON mode ]
+[PASS] SQLSelect RecordCount=6 -> "6"
+[PASS] SQLSelect first id=1 -> "1"
+[PASS] SQLSelect first name=Desktop -> "Desktop"
+[PASS] SQLSelect forward count=6 -> "6"
+[PASS] SQLSelect last id=6 -> "6"
+[PASS] SQLSelect last name=Best Practices -> "Best Practices"
+[ Slide 7: SQLSelectDB — backward traversal ]
+[PASS] SQLSelectDB RecordCount=6 -> "6"
+[PASS] SQLSelectDB MoveLast id=6 -> "6"
+[PASS] SQLSelectDB MoveLast name -> "Best Practices"
+[PASS] SQLSelectDB backward count=6 -> "6"
+[PASS] SQLSelectDB BOF=True at end -> "True"
+[PASS] SQLSelectDB last id visited=1 -> "1"
+
+[ Slide 7 cont.: SQLExecute ]
+[PASS] SQLExecute INSERT: no error -> "False"
+[PASS] INSERT: id=7 -> "7"
+[PASS] INSERT: name=Adding Tests -> "Adding Tests"
+[PASS] SQLExecute DELETE: no error -> "False"
+[PASS] DELETE: row gone (EOF=True) -> "True"
+
+[ Slide 8: InsertRecord + Prepare + db.Error ]
+[PASS] InsertRecord: no error -> "False"
+[PASS] Prepare intro: name=Adding Tests -> "Adding Tests"
+[PASS] db.Error=True after bad SQL -> "True"
+[PASS] db.ErrorMessage not empty -> "True"
+
+[ Slide 9: Navigation ]
+[PASS] MoveLast id=6 -> "6"
+[PASS] MoveFirst id=1 -> "1"
+[PASS] BOF=False after MoveFirst -> "False"
+[PASS] BOF=True after MovePrev past first -> "True"
+[PASS] MoveNext from BOF → id=1 -> "1"
+
+[ Slide 10: Reading Field Values ]
+[PASS] tracks RecordCount=6 -> "6"
+[PASS] tracks FieldCount=2 -> "2"
+[PASS] tracks DbFieldName(1)=id -> "id"
+[PASS] Field(name).Name=name -> "name"
+[PASS] IdxField(2).Name=name -> "name"
+[PASS] Field(name).StringValue -> "Xojo Desktop (Single Platform)"
+[PASS] Field(id).IntegerValue=1 -> "1"
+[PASS] Field(price).DoubleValue=99.0 -> "True"
+[PASS] Field(id).NativeValue=1 -> "1"
+[PASS] Field(name).GetString -> "Xojo Desktop (Single Platform)"
+[PASS] Field(id).Value Is Nil=False -> "False"
+
+[ Slide 11: Edit, Update & Delete ]
+[PASS] Edit+Update: name changed -> "Updated Demo Track"
+[PASS] DeleteRecord: row gone (EOF=True) -> "True"
+
+[ Slide 12: Bidirectional — backward (JSON) ]
+[PASS] MoveLast id=6 -> "6"
+[PASS] MoveLast name=Best Practices -> "Best Practices"
+[PASS] Backward count=6 -> "6"
+[PASS] BOF=True after backward -> "True"
+[PASS] Last id visited backward=1 -> "1"
+[ Slide 13: Bidirectional — forward (JSON) ]
+[PASS] Forward count=6 -> "6"
+[PASS] Forward last id=6 -> "6"
+[PASS] Forward last name=Best Practices -> "Best Practices"
+
+[ Slide 14: ColumnType ]
+[PASS] JSON ColumnType(1)=5 (always String) -> "5"
+[PASS] JSON ColumnType(2)=5 (always String) -> "5"
+[PASS] SQLite ColumnType(1)=4 (Integer) -> "4"
+[PASS] SQLite ColumnType(2)=5 (String) -> "5"
+
+[ Slide 15: PreparedStatement — ? markers ]
+[PASS] Prepare ?: RecordCount=1 -> "1"
+[PASS] Prepare ?: id=3 -> "3"
+[PASS] Prepare ?: name=Mobile & iOS -> "Mobile & iOS"
+
+[ Slide 16: PreparedStatement — $N markers ]
+[PASS] Prepare $N: RecordCount=3 -> "3"
+[PASS] Prepare $N: first id=2 -> "2"
+[PASS] Prepare $N: last id=4 -> "4"
+
+[ Slide 17: PreparedStatement — SQLExecute ]
+[PASS] PS SQLExecute UPDATE: no error -> "False"
+[PASS] PS SQLExecute UPDATE: name changed -> "Updated via PreparedStatement"
+[PASS] PS cleanup: RecordCount=6 -> "6"
+
+[ Slide 18: IDatabase Interface ]
+[PASS] IDatabase RecordCount=6 -> "6"
+[PASS] IDatabase first id=1 -> "1"
+[PASS] IDatabase first name=Desktop -> "Desktop"
+
+[ Summary ]
+Passed : 65 / 65
+Failed : 0 / 65
+Result : ALL DEMO CHECKS PASSED
