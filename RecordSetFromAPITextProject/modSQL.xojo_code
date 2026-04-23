@@ -325,7 +325,7 @@ Protected Module modSQL
 	#tag Constant, Name = KlantNr, Type = Double, Dynamic = False, Default = \"115", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = RefreshToken, Type = String, Dynamic = False, Default = \"REPLACE_WITH_YOUR_REFRESH_TOKEN", Scope = Public
+	#tag Constant, Name = RefreshToken, Type = String, Dynamic = False, Default = \"PUT_YOUR_REFRESHTOKEN_HERE", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = ServerName, Type = String, Dynamic = False, Default = \"ra", Scope = Public
